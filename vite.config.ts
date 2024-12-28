@@ -1,6 +1,7 @@
 import { defineConfig, loadEnv } from 'vite'
 import react from '@vitejs/plugin-react'
 import svgr from 'vite-plugin-svgr'
+import checker from 'vite-plugin-checker'
 import { resolve } from 'path'
 
 const ENV_PREFIX = 'REACT_APP_'
@@ -9,8 +10,7 @@ const ENV_PREFIX = 'REACT_APP_'
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, 'env', ENV_PREFIX)
   return {
-    // base: '/movies/',
-    plugins: [react(), svgr()],
+    plugins: [react(), svgr(), checker({ typescript: true })],
     server: {
       port: 3000,
       open: env.SERVER_OPEN_BROWSER === 'true',
